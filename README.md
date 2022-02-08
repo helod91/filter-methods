@@ -25,12 +25,12 @@
 #### Small changes
 - One small, but significant change can be found in the database class, where I incremented the version from 2 to 3 with a migration: I had to add the trigger time and reset time as milliseconds so I can properly filter them.
   - Increment the version number by one (if it's currently 1, then put 2):
-```java
-@Database(entities = {Events.class}, version = 3)
-```
+  ```java
+  @Database(entities = {Events.class}, version = 3)
+  ```
   - Add the migration that will add two new columns into the Events entity: 
- ```java
-static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+  ```java
+  static final Migration MIGRATION_2_3 = new Migration(2, 3) {
 
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
@@ -38,17 +38,17 @@ static final Migration MIGRATION_2_3 = new Migration(2, 3) {
             database.execSQL("ALTER TABLE Events ADD COLUMN ResetTimeValue INTEGER");
         }
     };
-```
+  ```
   - Use this migration when creating the DB instance: 
- ```java
-Room.databaseBuilder(context, EventsDatabase.class, "events-db")
+  ```java
+  Room.databaseBuilder(context, EventsDatabase.class, "events-db")
                         .addMigrations(MIGRATION_2_3)
                         .build();
-```
+  ```
   - If all of these where added, we should have a class that looks like:
- ```java
-@Database(entities = {Events.class}, version = 3)
-public abstract class EventsDatabase extends RoomDatabase {
+  ```java
+  @Database(entities = {Events.class}, version = 3)
+  public abstract class EventsDatabase extends RoomDatabase {
 
     static final Migration MIGRATION_2_3 = new Migration(2, 3) {
 
@@ -73,8 +73,8 @@ public abstract class EventsDatabase extends RoomDatabase {
     }
 
     abstract EventsDao eventsDao();
-}
-```
+  }
+  ```
 - As mentioned above, I've added two new columns to the Events entitiy, which looks like this in the java class:
 ```java
 @Entity
