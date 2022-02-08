@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.example.testing.MultiSpinner
+            android:id="@+id/main_primary_locations"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="31"
+            app:backgroundTint="@android:color/black" />
+
+        <com.example.testing.MultiSpinner
+            android:id="@+id/main_secondary_locations"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="31"
+            app:backgroundTint="@android:color/black" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/main_event_types"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="22"
+            app:backgroundTint="@android:color/black" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/main_time_frame"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="32"
+            app:backgroundTint="@android:color/black" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/main_sort_by"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="14"
+            app:backgroundTint="@android:color/black" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_events"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

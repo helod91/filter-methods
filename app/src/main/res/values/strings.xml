@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Testing</string>
+
+    <string-array name="time_frame">
+        <item>Everything</item>
+        <item>Last 30 hours</item>
+        <item>Last 24 hours</item>
+        <item>Last 12 hours</item>
+        <item>Last 7 hours</item>
+    </string-array>
+
+    <string-array name="sort_by">
+        <item>Sort by</item>
+        <item>Time asc.</item>
+        <item>Time desc.</item>
+        <item>Duration asc.</item>
+        <item>Duration desc.</item>
+    </string-array>
+</resources>
