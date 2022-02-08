@@ -95,24 +95,24 @@ public class Events {
 #### New methods
 
 - Inside the EventsDao you'll find a couple new methods:
- - The following returns all the primary locations stored:
+  - The following returns all the primary locations stored:
   ```java
     @Query("SELECT Primary_Location FROM events GROUP BY Primary_Location")
     List<String> getAllPrimaryLocations();
-```
- - The following returns all the secondary locations stored: 
- ```java
+  ```
+  - The following returns all the secondary locations stored: 
+  ```java
     @Query("SELECT Secondary_Location FROM events GROUP BY Secondary_Location")
     List<String> getAllSecondaryLocations();
-```
- - The following returns all the event types stored:
- ```java
-@Query("SELECT Event_Type FROM events GROUP BY Event_Type")
+  ```
+  - The following returns all the event types stored:
+  ```java
+    @Query("SELECT Event_Type FROM events GROUP BY Event_Type")
     List<String> getAllEventTypes();
-```
- - Finally, the filter method: 
- ```java
- @Query("SELECT * " +
+  ```
+  - Finally, the filter method: 
+  ```java
+  @Query("SELECT * " +
             "FROM events " +
             "WHERE Primary_Location IN (:primaryLocations) " +
             "AND Secondary_Location IN (:secondaryLocations) " +
@@ -125,26 +125,26 @@ public class Events {
             Long startDate,
             Long endDate
     );
-```
- - A small change, but maybe you already have it like this. I've added a conflict strategy for the insertAll method:
- ```java
-@Insert(onConflict = OnConflictStrategy.REPLACE)
+  ```
+  - A small change, but maybe you already have it like this. I've added a conflict strategy for the insertAll method:
+  ```java
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(Events... events);
-```
+  ```
 - EventsRepository has a couple of new methods as well, most of them are just to use the new methods introduced in EventsDao (I'll leave just one example)
- - To get all the primary locations. I'm using lambdas, but if you don't have the java version for that, you can implement this the classic way as well:
- ```java
-public LiveData<List<String>> getAllPrimaryLocations() {
+  - To get all the primary locations. I'm using lambdas, but if you don't have the java version for that, you can implement this the classic way as well:
+  ```java
+  public LiveData<List<String>> getAllPrimaryLocations() {
         MutableLiveData<List<String>> primaryLocations = new MutableLiveData<>();
 
         AsyncTask.execute(() -> primaryLocations.postValue(eventsDatabase.eventsDao().getAllPrimaryLocations()));
 
         return primaryLocations;
     }
-```
- - Filter events method:
- ```java
-public LiveData<List<Events>> filterEvents(List<String> primaryLocations, List<String> secondaryLocations, List<String> eventTypes, Long startDate) {
+  ```
+  - Filter events method:
+  ```java
+  public LiveData<List<Events>> filterEvents(List<String> primaryLocations, List<String> secondaryLocations, List<String> eventTypes, Long startDate) {
         MutableLiveData<List<Events>> events = new MutableLiveData<>();
 
         AsyncTask.execute(() -> events.postValue(eventsDatabase.eventsDao().filterEvents(
@@ -157,10 +157,10 @@ public LiveData<List<Events>> filterEvents(List<String> primaryLocations, List<S
 
         return events;
     }
-```
- - I've also added a new method that retrieves all the events, sets the triggerTimeValue and resetTimeValue (the two new fields added to Events) using the trigger_Time and reset_Time, parsing these using DateFormat and inserting back into the database. This is the reason I've added the replace conflict strategy, so we override the existing items with the modified ones:
- ```java
-public LiveData<List<Events>> refreshEvents() {
+   ```
+   - I've also added a new method that retrieves all the events, sets the triggerTimeValue and resetTimeValue (the two new fields added to Events) using the trigger_Time and reset_Time, parsing these using DateFormat and inserting back into the database. This is the reason I've added the replace conflict strategy, so we override the existing items with the modified ones:
+   ```java
+  public LiveData<List<Events>> refreshEvents() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault());
         MutableLiveData<List<Events>> events = new MutableLiveData<>();
 
@@ -188,7 +188,7 @@ public LiveData<List<Events>> refreshEvents() {
 
         return events;
     }
-```
+   ```
 - The ViewModel has a couple of new methods as well, but these are just using the repository methods. For example:
 ```java
 public LiveData<List<String>> getPrimaryLocations() {
