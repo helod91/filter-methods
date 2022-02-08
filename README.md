@@ -95,14 +95,14 @@ public class Events {
 #### New methods
 
 - Inside the EventsDao you'll find a couple new methods:
-  - The following returns all the primary locations stored:
+ - The following returns all the primary locations stored:
   ```java
-@Query("SELECT Primary_Location FROM events GROUP BY Primary_Location")
+    @Query("SELECT Primary_Location FROM events GROUP BY Primary_Location")
     List<String> getAllPrimaryLocations();
 ```
  - The following returns all the secondary locations stored: 
  ```java
-@Query("SELECT Secondary_Location FROM events GROUP BY Secondary_Location")
+    @Query("SELECT Secondary_Location FROM events GROUP BY Secondary_Location")
     List<String> getAllSecondaryLocations();
 ```
  - The following returns all the event types stored:
